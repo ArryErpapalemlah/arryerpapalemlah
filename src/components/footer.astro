@@ -1,0 +1,17 @@
+---
+import { profile } from "../data/profile";
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+const resumeUrl = `${base}${profile.resume}`;
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <span>© {year} {profile.name}. All rights reserved. Made with <span class="heart">♥</span> in {profile.city}.</span>
+  <nav>
+    <a href={profile.github} target="_blank" rel="noopener">GitHub</a>
+    <a href={profile.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+    <a href={`mailto:${profile.email}`}>Email</a>
+    <a href={resumeUrl} target="_blank">Resume</a>
+  </nav>
+</footer>

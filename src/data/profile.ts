@@ -51,6 +51,8 @@ export const projects: {
   summary: string;
   tags: string[];
   context: string;
+  role: string;
+  details: string[];
   visual: Visual;
   dark?: boolean;
 }[] = [
@@ -60,6 +62,13 @@ export const projects: {
       "An English predictive test module on a TypeScript full-stack: Express 5 + TypeORM + PostgreSQL API, React 18 + Zustand frontend, React Hook Form + Zod validation and JWT auth.",
     tags: ["React", "Node.js", "PostgreSQL", "TypeORM"],
     context: "PT Trisan Esa Cipta",
+    role: "Fullstack Developer",
+    details: [
+      "Backend on Node.js with Express 5, TypeORM and PostgreSQL.",
+      "Frontend built with React 18, Vite, Tailwind CSS v4 and Zustand for state.",
+      "Form handling and validation with React Hook Form + Zod.",
+      "JWT-based authentication across the TypeScript stack.",
+    ],
     visual: "test",
   },
   {
@@ -68,6 +77,13 @@ export const projects: {
       "NLP pipeline classifying Indonesian news into UN SDG categories for Universitas Sriwijaya's WCU dashboard — evolved from zero-shot XLM-RoBERTa to a multi-label LLM architecture.",
     tags: ["Python", "Groq", "Ollama", "MySQL"],
     context: "Universitas Sriwijaya",
+    role: "AI/NLP Engineer",
+    details: [
+      "Started with a zero-shot XLM-RoBERTa classifier for Indonesian news articles.",
+      "Redesigned the system into a multi-label LLM architecture (v2.0) using the Groq API and locally hosted Ollama (qwen2.5:7b).",
+      "Balanced cost, latency and classification accuracy between cloud and local models.",
+      "Designed the MySQL schema tracking evidence, classification logs and evaluation results for the World Class University dashboard.",
+    ],
     visual: "network",
     dark: true,
   },
@@ -77,6 +93,13 @@ export const projects: {
       "Mobile attendance system with face-recognition check-in, packaged as an Android APK with CapacitorJS.",
     tags: ["SolidJS", "Express", "FastAPI"],
     context: "PT Trisan Esa Cipta",
+    role: "Fullstack Developer",
+    details: [
+      "Employees check in from their mobile devices.",
+      "SolidJS + Vite frontend with an Express.js + TypeORM backend.",
+      "Integrated a Python FastAPI face-recognition service for identity verification.",
+      "Packaged the web app as an Android APK with CapacitorJS.",
+    ],
     visual: "mobile",
   },
   {
@@ -85,6 +108,13 @@ export const projects: {
       "Shopify storefront for a motorcycle retailer — custom catalogue, search, filtering and responsive layouts.",
     tags: ["Shopify", "Liquid", "SCSS"],
     context: "Vital Signals Studio",
+    role: "Full-Stack AI Engineer",
+    details: [
+      "Customised product catalogues, search, filtering and responsive layouts for apparel, helmets and accessories.",
+      "Built with Shopify Liquid, JavaScript and SCSS.",
+      "Integrated REST APIs and webhooks for product, order and inventory synchronisation.",
+      "Managed retail and wholesale product imports — pricing, categorisation and inventory updates.",
+    ],
     visual: "store",
   },
   {
@@ -93,6 +123,12 @@ export const projects: {
       "Property sales platform with a React + SASS frontend and an Express.js REST API backend.",
     tags: ["React", "Express", "SASS"],
     context: "PT Trisan Esa Cipta",
+    role: "Fullstack Developer",
+    details: [
+      "React + SASS frontend for browsing and promoting housing listings.",
+      "Express.js REST API backend.",
+      "Coordinated development tasks with the team on GitHub to manage features and maintain code quality.",
+    ],
     visual: "landing",
   },
   {
@@ -101,7 +137,43 @@ export const projects: {
       "Dynamic platform connecting entrepreneurs with investors, with asynchronous features for a smoother UX.",
     tags: ["Laravel 10", "Blade", "SASS"],
     context: "PT Trisan Esa Cipta",
+    role: "Fullstack Developer",
+    details: [
+      "Platform connecting entrepreneurs with investors.",
+      "Built with PHP, Laravel 10, Blade and SASS.",
+      "Implemented asynchronous features to improve the user experience.",
+      "Collaborated with the team through a shared company GitHub repository.",
+    ],
     visual: "dashboard",
+    dark: true,
+  },
+  {
+    title: "Construction Monitoring System",
+    summary:
+      "Internal office web system for monitoring, reporting and managing construction projects within the Construction Division.",
+    tags: ["Laravel", "Inertia.js", "Vue.js"],
+    context: "PT Trisan Esa Cipta",
+    role: "Fullstack Developer",
+    details: [
+      "Internal system used by the Construction Division to monitor, report on and manage construction projects.",
+      "Built with Laravel, Inertia.js and Vue.js.",
+      "Fixed bugs and resolved technical issues, working in a team-based GitHub repository.",
+    ],
+    visual: "dashboard",
+  },
+  {
+    title: "Architect Division Website",
+    summary:
+      "Landing page for the Architect Division with Astro, backed by Filament (PHP) as the admin system for dynamic content.",
+    tags: ["Astro", "Filament", "PHP"],
+    context: "PT Trisan Esa Cipta",
+    role: "Fullstack Developer",
+    details: [
+      "Static-first landing page built with Astro for performance.",
+      "Integrated Filament (PHP) as the admin/backend so content can be managed dynamically.",
+      "Sister site to the Esmart marketing site, also built with Astro.",
+    ],
+    visual: "landing",
     dark: true,
   },
   {
@@ -110,29 +182,69 @@ export const projects: {
       "Android expert system that diagnoses computer hardware failures, backed by a CodeIgniter 3 REST API.",
     tags: ["Kotlin", "CodeIgniter", "MySQL"],
     context: "Marco IT Solution · Thesis",
+    role: "Android Developer",
+    details: [
+      "Kotlin Android app that diagnoses computer and laptop hardware failures with an expert system.",
+      "CodeIgniter 3 REST API connects the app to the server database, keeping the app size small.",
+      "Undergraduate thesis compared Bayes' theorem and Dempster-Shafer methods for the diagnosis.",
+    ],
     visual: "mobile",
   },
 ];
 
-export const experience = [
+export type Role = {
+  role: string;
+  company: string;
+  place?: string;
+  period: string;
+  points: string[];
+  more?: string[]; // revealed by "Show more"
+  tags: string[];
+  projects?: string[]; // project titles that open their modal
+};
+
+export const experience: Role[] = [
   {
     role: "Fullstack Developer",
     company: "PT Trisan Esa Cipta",
     place: "Palembang · On-site",
     period: "Sep 2023 — Present",
     points: [
-      "Built and maintained internal and external platforms — housing sales, investor matching and Esmart products — with Laravel, React, Vue and Express.js.",
-      "Built Astro landing pages with Filament (PHP) as the CMS, and an Android attendance app with SolidJS, TypeORM and FastAPI face recognition.",
+      "Built a platform connecting entrepreneurs with investors using Laravel 10, Blade and SASS, adding asynchronous features to make the experience smoother.",
+      "Built a housing sales platform with a React + SASS frontend and an Express.js REST API backend.",
+    ],
+    more: [
+      "Built an attendance system employees use from their phones, with a Python FastAPI face-recognition service for identity checks, packaged as an Android APK with CapacitorJS.",
+      "Delivered Esmart features end to end: an English predictive test module (Express 5, TypeORM, PostgreSQL, React 18, Tailwind v4, JWT) plus parent report and financial systems.",
+      "Created static-first landing pages with Astro — for the Architect Division (with Filament as the CMS) and for Esmart.",
+      "Fixed bugs and resolved technical issues in the internal construction-project monitoring system (Laravel, Inertia.js, Vue.js).",
+      "Contributed to a semi single-page landing page with React, SASS and Laravel (Inertia.js), improving responsiveness and transitions.",
+      "Worked in shared GitHub repositories throughout, using version control and code reviews.",
+    ],
+    tags: ["Laravel", "Inertia.js", "Vue", "React", "Astro", "Filament", "Express", "TypeORM", "PostgreSQL", "SolidJS", "FastAPI", "CapacitorJS"],
+    projects: [
+      "Investor Match",
+      "Housing Sales Platform",
+      "Face-ID Attendance",
+      "Esmart Predictive Test",
+      "Architect Division Website",
+      "Construction Monitoring System",
     ],
   },
   {
     role: "Full-Stack AI Engineer",
     company: "Vital Signals Studio",
-    place: "Remote",
     period: "Feb 2026 — Present",
     points: [
-      "Developed responsive Shopify storefronts with Liquid, JavaScript and SCSS, integrating REST APIs and webhooks for product, order and inventory sync.",
+      "Developed responsive Shopify storefronts with Liquid, JavaScript and SCSS, integrating REST APIs and webhooks to sync products, orders and inventory.",
+      "Building a storefront for a motorcycle retailer with custom catalogues, search, filtering and responsive layouts for apparel, helmets and accessories.",
     ],
+    more: [
+      "Supported data migration, SEO and testing.",
+      "Managed retail and wholesale product imports and catalogue management — product data, pricing, categorisation and inventory updates.",
+    ],
+    tags: ["Shopify", "Liquid", "JavaScript", "SCSS", "REST APIs", "Webhooks"],
+    projects: ["Motorcycle Storefront"],
   },
   {
     role: "AI/NLP Engineer",
@@ -140,50 +252,69 @@ export const experience = [
     place: "Remote · Contract",
     period: "Jan 2026 — Jul 2026",
     points: [
-      "Built an SDG news-classification pipeline using Groq and locally hosted Ollama (qwen2.5:7b), balancing cost, latency and accuracy.",
+      "Built an NLP pipeline that automatically classifies Indonesian news articles into UN SDG categories for the university's World Class University dashboard.",
+      "Started with a zero-shot XLM-RoBERTa classifier, then redesigned it into a multi-label LLM architecture (v2.0) using the Groq API and locally hosted Ollama (qwen2.5:7b), balancing cost, latency and accuracy.",
     ],
+    more: [
+      "Designed the MySQL schema that tracks evidence, classification logs and evaluation results.",
+    ],
+    tags: ["Python", "XLM-RoBERTa", "Groq", "Ollama", "MySQL"],
+    projects: ["SDG News Classifier"],
   },
   {
     role: "Linux System Administrator",
     company: "Marco Digital Partner",
     place: "Palembang",
     period: "Jul 2022 — Nov 2023",
-    points: ["Maintained company servers, databases and daily backups; fixed WordPress and PHP sites."],
+    points: [
+      "Rebuilt, maintained and backed up the company server's web files every day.",
+      "Maintained the company database and fixed bugs on WordPress and PHP-based websites.",
+    ],
+    tags: ["Linux", "MySQL", "PHP", "WordPress"],
   },
   {
     role: "CMS Developer",
     company: "Marco Digital Partner",
     place: "Palembang",
     period: "Apr 2022 — Nov 2023",
-    points: ["Developed custom WordPress templates aligned with each client's design and branding."],
+    points: ["Developed custom WordPress templates matched to each client's site design and branding."],
+    tags: ["WordPress", "PHP", "MySQL"],
   },
   {
     role: "Android Developer",
     company: "Marco IT Solution",
     place: "Palembang · Contract",
     period: "Sep 2021 — Aug 2022",
-    points: ["Built a Kotlin expert-system app for hardware diagnosis with a CodeIgniter 3 REST API."],
+    points: [
+      "Developed a Kotlin app that diagnoses computer and laptop hardware failures using an expert-system technique.",
+      "Built the CodeIgniter 3 REST API that connects the app to the server database, keeping the app small.",
+    ],
+    tags: ["Kotlin", "Android", "CodeIgniter 3", "MySQL"],
+    projects: ["Hardware Diagnosis App"],
   },
   {
     role: "Multimedia Intern",
     company: "Universitas Sriwijaya",
     place: "Indralaya · Internship",
     period: "Feb 2022 — Jul 2022",
-    points: ["Designed posters for the Office of Cooperation and International Services."],
+    points: ["Six months at the Office of Cooperation and International Services, editing and designing posters in Photoshop."],
+    tags: ["Photoshop"],
   },
   {
     role: "Web Developer",
     company: "Dezainla",
     place: "Palembang · Contract",
     period: "Dec 2020 — Jun 2021",
-    points: ["Built an employee and payroll information system with CodeIgniter 3, deployed on a VPS."],
+    points: ["Designed and built an employee and payroll information system with CodeIgniter 3 and deployed it on a VPS (OpenVZ)."],
+    tags: ["CodeIgniter 3", "MySQL", "CSS", "VPS"],
   },
   {
     role: "UI Designer",
     company: "Marco Digital Partner",
     place: "Palembang · Internship",
     period: "Dec 2020 — Jan 2021",
-    points: ["Designed and developed websites with WordPress."],
+    points: ["Learned to design and develop websites with WordPress."],
+    tags: ["WordPress", "UI Design"],
   },
 ];
 

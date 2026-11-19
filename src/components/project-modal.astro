@@ -1,0 +1,84 @@
+---
+// Project details modal. Opened by clicking a card in the Selected Works row
+// (any element with data-project="<index>").
+import Icon from "./Icon.astro";
+import Mockup from "./Mockup.astro";
+import { profile, projects } from "../data/profile";
+---
+
+<dialog class="modal" id="projectModal" aria-labelledby="projectModalTitle">
+  <button class="modal-close" type="button" data-close aria-label="Close"><Icon name="close" size={18} /></button>
+
+  {projects.map((p, i) => (
+    <article class="modal-item" data-project-detail={i} hidden>
+      <div class="modal-shot"><Mockup variant={p.visual} dark={p.dark} /></div>
+      <div class="modal-body">
+        <div class="eyebrow">{p.context} · {p.role}</div>
+        <h2 class="modal-title" id={i === 0 ? "projectModalTitle" : undefined}>{p.title}</h2>
+        <p class="modal-summary">{p.summary}</p>
+
+        <h3 class="modal-label">Highlights</h3>
+        <ul class="modal-list">
+          {p.details.map((d) => <li>{d}</li>)}
+        </ul>
+
+        <h3 class="modal-label">Tech stack</h3>
+        <div class="tags">{p.tags.map((t) => <span class="tag">{t}</span>)}</div>
+
+        <div class="modal-actions">
+          <a class="btn btn-dark" href={`mailto:${profile.email}?subject=${encodeURIComponent(`About: ${p.title}`)}`}>
+            Ask about this project <Icon name="arrow" size={14} />
+          </a>
+          <div class="modal-nav">
+            <button class="arrow" type="button" data-step="-1" aria-label="Previous project"><Icon name="left" size={18} /></button>
+            <button class="arrow" type="button" data-step="1" aria-label="Next project"><Icon name="right" size={18} /></button>
+          </div>
+        </div>
+      </div>
+    </article>
+  ))}
+</dialog>
+
+<script>
+  const modal = document.getElementById("projectModal") as HTMLDialogElement;
+  const items = [...modal.querySelectorAll<HTMLElement>("[data-project-detail]")];
+  let current = 0;
+
+  const show = (i: number) => {
+    current = (i + items.length) % items.length;
+    items.forEach((el, n) => (el.hidden = n !== current));
+    // keep the dialog labelled by the visible title
+    items.forEach((el) => el.querySelector(".modal-title")?.removeAttribute("id"));
+    items[current].querySelector(".modal-title")!.id = "projectModalTitle";
+    modal.scrollTop = 0;
+  };
+
+  const open = (i: number) => {
+    show(i);
+    if (!modal.open) modal.showModal();
+  };
+
+  document.querySelectorAll<HTMLElement>("[data-project]").forEach((card) => {
+    const i = Number(card.dataset.project);
+    card.addEventListener("click", () => open(i));
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        open(i);
+      }
+    });
+  });
+
+  modal.querySelectorAll("[data-close]").forEach((b) => b.addEventListener("click", () => modal.close()));
+  modal.querySelectorAll<HTMLElement>("[data-step]").forEach((b) =>
+    b.addEventListener("click", () => show(current + Number(b.dataset.step)))
+  );
+  // click on the dimmed backdrop closes the modal
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) modal.close();
+  });
+  modal.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") show(current + 1);
+    if (e.key === "ArrowLeft") show(current - 1);
+  });
+</script>

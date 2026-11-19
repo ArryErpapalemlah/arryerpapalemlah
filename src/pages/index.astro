@@ -3,13 +3,13 @@ import Layout from "../layouts/Layout.astro";
 import Sidebar from "../components/Sidebar.astro";
 import Icon from "../components/Icon.astro";
 import Mockup from "../components/Mockup.astro";
+import Footer from "../components/footer.astro";
+import ProjectModal from "../components/project-modal.astro";
 import { profile, stack, moreTools, projects, experience, education, certifications } from "../data/profile";
 
 const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 const resumeUrl = `${base}${profile.resume}`;
 const years = Math.floor((Date.now() - new Date(profile.careerStart).getTime()) / (365.25 * 24 * 3600 * 1000));
-const [first, ...rest] = projects;
-const year = new Date().getFullYear();
 ---
 
 <Layout>
@@ -111,21 +111,19 @@ const year = new Date().getFullYear();
       </div>
 
       <div class="track" id="track">
-        <article class="card project featured">
-          <div class="shot">
-            <span class="badge">Case study</span>
-            <Mockup variant={first.visual} dark={first.dark} />
-          </div>
-          <div class="project-body">
-            <div class="eyebrow">{first.context}</div>
-            <h3 class="project-title lg">{first.title}</h3>
-            <p class="muted">{first.summary}</p>
-            <div class="tags">{first.tags.map((t) => <span class="tag">{t}</span>)}</div>
-          </div>
-        </article>
-        {rest.map((p) => (
-          <article class="card project">
-            <div class="shot"><Mockup variant={p.visual} dark={p.dark} /></div>
+        {projects.map((p, i) => (
+          <article
+            class={`card project${i === 0 ? " featured" : ""}`}
+            data-project={i}
+            role="button"
+            tabindex="0"
+            aria-haspopup="dialog"
+            aria-label={`View details: ${p.title}`}
+          >
+            <div class="shot">
+              <span class="badge">Case study</span>
+              <Mockup variant={p.visual} dark={p.dark} />
+            </div>
             <div class="project-body">
               <div class="eyebrow">{p.context}</div>
               <h3 class="project-title">{p.title}</h3>
@@ -148,8 +146,35 @@ const year = new Date().getFullYear();
                 <h3>{e.role}</h3>
                 <span class="date">{e.period}</span>
               </div>
-              <div class="tl-company">{e.company} <span>/</span> {e.place}</div>
-              {e.points.map((p) => <p class="muted small">{p}</p>)}
+              <div class="tl-company">{e.company}{e.place && <><span>/</span>{e.place}</>}</div>
+
+              <ul class="tl-points">
+                {e.points.map((pt) => <li>{pt}</li>)}
+              </ul>
+              {e.more && (
+                <div class="tl-more" id={`more-${i}`} hidden>
+                  <ul class="tl-points">
+                    {e.more.map((pt) => <li>{pt}</li>)}
+                  </ul>
+                </div>
+              )}
+
+              <div class="tl-tags">{e.tags.map((t) => <span class="tag">{t}</span>)}</div>
+
+              {(e.more || e.projects) && (
+                <div class="tl-actions">
+                  {e.more && (
+                    <button class="more-btn" type="button" aria-expanded="false" aria-controls={`more-${i}`}>
+                      <span>Show more</span>
+                      <Icon name="right" size={14} class="chev" />
+                    </button>
+                  )}
+                  {e.projects?.map((title) => {
+                    const idx = projects.findIndex((pr) => pr.title === title);
+                    return idx >= 0 && <button class="proj-link" type="button" data-project={idx}>{title} <Icon name="arrow" size={12} /></button>;
+                  })}
+                </div>
+              )}
             </li>
           ))}
         </ol>
@@ -196,20 +221,25 @@ const year = new Date().getFullYear();
       </div>
     </section>
 
-    <footer class="footer">
-      <span>© {year} {profile.name}. All rights reserved. Made with <span class="heart">♥</span> in {profile.city}.</span>
-      <nav>
-        <a href={profile.github} target="_blank" rel="noopener">GitHub</a>
-        <a href={profile.linkedin} target="_blank" rel="noopener">LinkedIn</a>
-        <a href={`mailto:${profile.email}`}>Email</a>
-        <a href={resumeUrl} target="_blank">Resume</a>
-      </nav>
-    </footer>
+    <Footer />
   </main>
 
+  <ProjectModal />
+
   <script>
+    // "Show more" on timeline entries
+    document.querySelectorAll<HTMLButtonElement>(".more-btn").forEach((btn) => {
+      const panel = document.getElementById(btn.getAttribute("aria-controls")!)!;
+      btn.addEventListener("click", () => {
+        const open = btn.getAttribute("aria-expanded") === "true";
+        btn.setAttribute("aria-expanded", String(!open));
+        panel.hidden = open;
+        btn.querySelector("span")!.textContent = open ? "Show more" : "Show less";
+      });
+    });
+
     const track = document.getElementById("track")!;
-    const step = () => (track.querySelector(".project:not(.featured)") as HTMLElement)?.offsetWidth + 24 || 300;
+    const step = () => 280;
     const prev = document.getElementById("prevBtn") as HTMLButtonElement;
     const next = document.getElementById("nextBtn") as HTMLButtonElement;
     prev.addEventListener("click", () => track.scrollBy({ left: -step(), behavior: "smooth" }));
