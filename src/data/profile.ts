@@ -11,8 +11,7 @@ export const profile = {
   country: "Indonesia",
   availability: "Remote / Hybrid Available",
   github: "https://github.com/ArryErpapalemlah",
-  // Replace with your exact profile URL, e.g. https://www.linkedin.com/in/your-handle
-  linkedin: "https://www.linkedin.com/search/results/all/?keywords=Arry%20Erpapalemlah",
+  linkedin: "https://www.linkedin.com/in/muhammad-arry-erpapalemlah",
   resume: "Arry-Erpapalemlah-CV.pdf",
   careerStart: "2020-12-01",
   background:
@@ -56,141 +55,141 @@ export const projects: {
   visual: Visual;
   dark?: boolean;
 }[] = [
-  {
-    title: "Esmart Predictive Test",
-    summary:
-      "An English predictive test module on a TypeScript full-stack: Express 5 + TypeORM + PostgreSQL API, React 18 + Zustand frontend, React Hook Form + Zod validation and JWT auth.",
-    tags: ["React", "Node.js", "PostgreSQL", "TypeORM"],
-    context: "PT Trisan Esa Cipta",
-    role: "Fullstack Developer",
-    details: [
-      "Backend on Node.js with Express 5, TypeORM and PostgreSQL.",
-      "Frontend built with React 18, Vite, Tailwind CSS v4 and Zustand for state.",
-      "Form handling and validation with React Hook Form + Zod.",
-      "JWT-based authentication across the TypeScript stack.",
-    ],
-    visual: "test",
-  },
-  {
-    title: "SDG News Classifier",
-    summary:
-      "NLP pipeline classifying Indonesian news into UN SDG categories for Universitas Sriwijaya's WCU dashboard — evolved from zero-shot XLM-RoBERTa to a multi-label LLM architecture.",
-    tags: ["Python", "Groq", "Ollama", "MySQL"],
-    context: "Universitas Sriwijaya",
-    role: "AI/NLP Engineer",
-    details: [
-      "Started with a zero-shot XLM-RoBERTa classifier for Indonesian news articles.",
-      "Redesigned the system into a multi-label LLM architecture (v2.0) using the Groq API and locally hosted Ollama (qwen2.5:7b).",
-      "Balanced cost, latency and classification accuracy between cloud and local models.",
-      "Designed the MySQL schema tracking evidence, classification logs and evaluation results for the World Class University dashboard.",
-    ],
-    visual: "network",
-    dark: true,
-  },
-  {
-    title: "Face-ID Attendance",
-    summary:
-      "Mobile attendance system with face-recognition check-in, packaged as an Android APK with CapacitorJS.",
-    tags: ["SolidJS", "Express", "FastAPI"],
-    context: "PT Trisan Esa Cipta",
-    role: "Fullstack Developer",
-    details: [
-      "Employees check in from their mobile devices.",
-      "SolidJS + Vite frontend with an Express.js + TypeORM backend.",
-      "Integrated a Python FastAPI face-recognition service for identity verification.",
-      "Packaged the web app as an Android APK with CapacitorJS.",
-    ],
-    visual: "mobile",
-  },
-  {
-    title: "Motorcycle Storefront",
-    summary:
-      "Shopify storefront for a motorcycle retailer — custom catalogue, search, filtering and responsive layouts.",
-    tags: ["Shopify", "Liquid", "SCSS"],
-    context: "Vital Signals Studio",
-    role: "Full-Stack AI Engineer",
-    details: [
-      "Customised product catalogues, search, filtering and responsive layouts for apparel, helmets and accessories.",
-      "Built with Shopify Liquid, JavaScript and SCSS.",
-      "Integrated REST APIs and webhooks for product, order and inventory synchronisation.",
-      "Managed retail and wholesale product imports — pricing, categorisation and inventory updates.",
-    ],
-    visual: "store",
-  },
-  {
-    title: "Housing Sales Platform",
-    summary:
-      "Property sales platform with a React + SASS frontend and an Express.js REST API backend.",
-    tags: ["React", "Express", "SASS"],
-    context: "PT Trisan Esa Cipta",
-    role: "Fullstack Developer",
-    details: [
-      "React + SASS frontend for browsing and promoting housing listings.",
-      "Express.js REST API backend.",
-      "Coordinated development tasks with the team on GitHub to manage features and maintain code quality.",
-    ],
-    visual: "landing",
-  },
-  {
-    title: "Investor Match",
-    summary:
-      "Dynamic platform connecting entrepreneurs with investors, with asynchronous features for a smoother UX.",
-    tags: ["Laravel 10", "Blade", "SASS"],
-    context: "PT Trisan Esa Cipta",
-    role: "Fullstack Developer",
-    details: [
-      "Platform connecting entrepreneurs with investors.",
-      "Built with PHP, Laravel 10, Blade and SASS.",
-      "Implemented asynchronous features to improve the user experience.",
-      "Collaborated with the team through a shared company GitHub repository.",
-    ],
-    visual: "dashboard",
-    dark: true,
-  },
-  {
-    title: "Construction Monitoring System",
-    summary:
-      "Internal office web system for monitoring, reporting and managing construction projects within the Construction Division.",
-    tags: ["Laravel", "Inertia.js", "Vue.js"],
-    context: "PT Trisan Esa Cipta",
-    role: "Fullstack Developer",
-    details: [
-      "Internal system used by the Construction Division to monitor, report on and manage construction projects.",
-      "Built with Laravel, Inertia.js and Vue.js.",
-      "Fixed bugs and resolved technical issues, working in a team-based GitHub repository.",
-    ],
-    visual: "dashboard",
-  },
-  {
-    title: "Architect Division Website",
-    summary:
-      "Landing page for the Architect Division with Astro, backed by Filament (PHP) as the admin system for dynamic content.",
-    tags: ["Astro", "Filament", "PHP"],
-    context: "PT Trisan Esa Cipta",
-    role: "Fullstack Developer",
-    details: [
-      "Static-first landing page built with Astro for performance.",
-      "Integrated Filament (PHP) as the admin/backend so content can be managed dynamically.",
-      "Sister site to the Esmart marketing site, also built with Astro.",
-    ],
-    visual: "landing",
-    dark: true,
-  },
-  {
-    title: "Hardware Diagnosis App",
-    summary:
-      "Android expert system that diagnoses computer hardware failures, backed by a CodeIgniter 3 REST API.",
-    tags: ["Kotlin", "CodeIgniter", "MySQL"],
-    context: "Marco IT Solution · Thesis",
-    role: "Android Developer",
-    details: [
-      "Kotlin Android app that diagnoses computer and laptop hardware failures with an expert system.",
-      "CodeIgniter 3 REST API connects the app to the server database, keeping the app size small.",
-      "Undergraduate thesis compared Bayes' theorem and Dempster-Shafer methods for the diagnosis.",
-    ],
-    visual: "mobile",
-  },
-];
+    {
+      title: "Esmart Predictive Test",
+      summary:
+        "An English predictive test module on a TypeScript full-stack: Express 5 + TypeORM + PostgreSQL API, React 18 + Zustand frontend, React Hook Form + Zod validation and JWT auth.",
+      tags: ["React", "Node.js", "PostgreSQL", "TypeORM"],
+      context: "PT Trisan Esa Cipta",
+      role: "Fullstack Developer",
+      details: [
+        "Backend on Node.js with Express 5, TypeORM and PostgreSQL.",
+        "Frontend built with React 18, Vite, Tailwind CSS v4 and Zustand for state.",
+        "Form handling and validation with React Hook Form + Zod.",
+        "JWT-based authentication across the TypeScript stack.",
+      ],
+      visual: "test",
+    },
+    {
+      title: "SDG News Classifier",
+      summary:
+        "NLP pipeline classifying Indonesian news into UN SDG categories for Universitas Sriwijaya's WCU dashboard — evolved from zero-shot XLM-RoBERTa to a multi-label LLM architecture.",
+      tags: ["Python", "Groq", "Ollama", "MySQL"],
+      context: "Universitas Sriwijaya",
+      role: "AI/NLP Engineer",
+      details: [
+        "Started with a zero-shot XLM-RoBERTa classifier for Indonesian news articles.",
+        "Redesigned the system into a multi-label LLM architecture (v2.0) using the Groq API and locally hosted Ollama (qwen2.5:7b).",
+        "Balanced cost, latency and classification accuracy between cloud and local models.",
+        "Designed the MySQL schema tracking evidence, classification logs and evaluation results for the World Class University dashboard.",
+      ],
+      visual: "network",
+      dark: true,
+    },
+    {
+      title: "Face-ID Attendance",
+      summary:
+        "Mobile attendance system with face-recognition check-in, packaged as an Android APK with CapacitorJS.",
+      tags: ["SolidJS", "Express", "FastAPI"],
+      context: "PT Trisan Esa Cipta",
+      role: "Fullstack Developer",
+      details: [
+        "Employees check in from their mobile devices.",
+        "SolidJS + Vite frontend with an Express.js + TypeORM backend.",
+        "Integrated a Python FastAPI face-recognition service for identity verification.",
+        "Packaged the web app as an Android APK with CapacitorJS.",
+      ],
+      visual: "mobile",
+    },
+    {
+      title: "Motorcycle Storefront",
+      summary:
+        "Shopify storefront for a motorcycle retailer — custom catalogue, search, filtering and responsive layouts.",
+      tags: ["Shopify", "Liquid", "SCSS"],
+      context: "Vital Signals Studio",
+      role: "Full-Stack AI Engineer",
+      details: [
+        "Customised product catalogues, search, filtering and responsive layouts for apparel, helmets and accessories.",
+        "Built with Shopify Liquid, JavaScript and SCSS.",
+        "Integrated REST APIs and webhooks for product, order and inventory synchronisation.",
+        "Managed retail and wholesale product imports — pricing, categorisation and inventory updates.",
+      ],
+      visual: "store",
+    },
+    {
+      title: "Housing Sales Platform",
+      summary:
+        "Property sales platform with a React + SASS frontend and an Express.js REST API backend.",
+      tags: ["React", "Express", "SASS"],
+      context: "PT Trisan Esa Cipta",
+      role: "Fullstack Developer",
+      details: [
+        "React + SASS frontend for browsing and promoting housing listings.",
+        "Express.js REST API backend.",
+        "Coordinated development tasks with the team on GitHub to manage features and maintain code quality.",
+      ],
+      visual: "landing",
+    },
+    {
+      title: "Investor Match",
+      summary:
+        "Dynamic platform connecting entrepreneurs with investors, with asynchronous features for a smoother UX.",
+      tags: ["Laravel 10", "Blade", "SASS"],
+      context: "PT Trisan Esa Cipta",
+      role: "Fullstack Developer",
+      details: [
+        "Platform connecting entrepreneurs with investors.",
+        "Built with PHP, Laravel 10, Blade and SASS.",
+        "Implemented asynchronous features to improve the user experience.",
+        "Collaborated with the team through a shared company GitHub repository.",
+      ],
+      visual: "dashboard",
+      dark: true,
+    },
+    {
+      title: "Construction Monitoring System",
+      summary:
+        "Internal office web system for monitoring, reporting and managing construction projects within the Construction Division.",
+      tags: ["Laravel", "Inertia.js", "Vue.js"],
+      context: "PT Trisan Esa Cipta",
+      role: "Fullstack Developer",
+      details: [
+        "Internal system used by the Construction Division to monitor, report on and manage construction projects.",
+        "Built with Laravel, Inertia.js and Vue.js.",
+        "Fixed bugs and resolved technical issues, working in a team-based GitHub repository.",
+      ],
+      visual: "dashboard",
+    },
+    {
+      title: "Architect Division Website",
+      summary:
+        "Landing page for the Architect Division with Astro, backed by Filament (PHP) as the admin system for dynamic content.",
+      tags: ["Astro", "Filament", "PHP"],
+      context: "PT Trisan Esa Cipta",
+      role: "Fullstack Developer",
+      details: [
+        "Static-first landing page built with Astro for performance.",
+        "Integrated Filament (PHP) as the admin/backend so content can be managed dynamically.",
+        "Sister site to the Esmart marketing site, also built with Astro.",
+      ],
+      visual: "landing",
+      dark: true,
+    },
+    {
+      title: "Hardware Diagnosis App",
+      summary:
+        "Android expert system that diagnoses computer hardware failures, backed by a CodeIgniter 3 REST API.",
+      tags: ["Kotlin", "CodeIgniter", "MySQL"],
+      context: "Marco IT Solution · Thesis",
+      role: "Android Developer",
+      details: [
+        "Kotlin Android app that diagnoses computer and laptop hardware failures with an expert system.",
+        "CodeIgniter 3 REST API connects the app to the server database, keeping the app size small.",
+        "Undergraduate thesis compared Bayes' theorem and Dempster-Shafer methods for the diagnosis.",
+      ],
+      visual: "mobile",
+    },
+  ];
 
 export type Role = {
   role: string;
