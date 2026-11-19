@@ -1,11 +1,225 @@
 ---
-import Index from "../components/index.astro";
 import Layout from "../layouts/Layout.astro";
+import Sidebar from "../components/Sidebar.astro";
+import Icon from "../components/Icon.astro";
+import Mockup from "../components/Mockup.astro";
+import { profile, stack, moreTools, projects, experience, education, certifications } from "../data/profile";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+const resumeUrl = `${base}${profile.resume}`;
+const years = Math.floor((Date.now() - new Date(profile.careerStart).getTime()) / (365.25 * 24 * 3600 * 1000));
+const [first, ...rest] = projects;
+const year = new Date().getFullYear();
 ---
 
 <Layout>
-	<Index />
+  <Sidebar />
+
+  <main class="main">
+    <!-- ===== DASHBOARD ===== -->
+    <section id="dashboard" class="grid-hero">
+      <div class="card hero">
+        <span class="pill">Available for hire</span>
+        <h1 class="hero-title">Fullstack<br />Developer<span class="dot">.</span></h1>
+        <p class="hero-sub">{profile.tagline}</p>
+        <div class="hero-actions">
+          <a class="btn btn-dark" href="#work">Selected Work <Icon name="arrow" size={14} /></a>
+          <a class="btn btn-light" href={resumeUrl} download>Download Resume <Icon name="download" size={14} /></a>
+        </div>
+
+        <!-- line-art workstation illustration -->
+        <svg class="hero-art" viewBox="0 0 200 200" fill="none" stroke="#18181b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M30 150h140" />
+          <path d="M44 150 34 192M156 150l10 42" />
+          <rect x="52" y="62" width="96" height="64" rx="6" />
+          <rect x="60" y="70" width="80" height="48" rx="2" fill="#fafafa" />
+          <path d="M68 80h18M72 88h30M72 96h22M68 104h12M96 104h24M90 80h10" stroke-width="2.4" />
+          <circle cx="132" cy="80" r="1.6" fill="#18181b" />
+          <path d="M40 140h120l-8 10H48z" fill="#fff" />
+          <path d="M92 145h16" />
+          <path d="M156 118v22h14v-22z" fill="#fff" />
+          <path d="M170 123c6 0 6 10 0 10" />
+          <path d="M160 112c0-4 4-4 4-8M166 112c0-4 4-4 4-8" stroke-width="1.6" />
+          <path d="M26 140c0-12 6-22 14-22s10 10 6 22" fill="#fff" />
+          <path d="M33 140c2-10 1-30-6-40M38 122c4-8 10-12 16-12" stroke-width="1.6" />
+        </svg>
+      </div>
+
+      <div class="hero-side">
+        <div class="card stat">
+          <div class="stat-num">{years}<span>+</span></div>
+          <div class="stat-label">Years of experience</div>
+        </div>
+        <div class="card location">
+          <div class="loc-top">
+            <span class="icon-box"><Icon name="pin" size={18} /></span>
+            <span class="eyebrow">{profile.city}, ID</span>
+          </div>
+          <div>
+            <div class="loc-country">{profile.country}</div>
+            <div class="muted small">{profile.availability}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about" class="grid-2">
+      <div class="card pad-lg">
+        <div class="card-head">
+          <h2 class="h-display">Background</h2>
+          <span class="icon-circle"><Icon name="user" size={18} /></span>
+        </div>
+        <p class="body-text">{profile.background}</p>
+        <div class="chip-row">
+          <div class="feature"><Icon name="branch" size={18} /> Fullstack</div>
+          <div class="feature"><Icon name="cpu" size={18} /> AI / NLP</div>
+          <div class="feature"><Icon name="siAndroid" size={16} /> Mobile</div>
+          <div class="feature"><Icon name="globe" size={18} /> {profile.languages.length} languages</div>
+        </div>
+      </div>
+
+      <div class="card pad-lg">
+        <div class="eyebrow">Tech stack</div>
+        <div class="stack">
+          {stack.map((t) => (
+            <span class="tech"><Icon name={t.icon} size={14} /> {t.name}</span>
+          ))}
+        </div>
+        <div class="more">
+          <span class="eyebrow">More tools</span>
+          <div class="more-icons">
+            {moreTools.map((t) => (
+              <span title={t.name}><Icon name={t.icon} size={17} /></span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SELECTED WORK ===== -->
+    <section id="work" class="works">
+      <div class="works-head">
+        <div>
+          <h2 class="h-section">Selected <span>Works</span></h2>
+          <p class="muted">Curated projects that demonstrate fullstack expertise.</p>
+        </div>
+        <div class="arrows">
+          <button class="arrow" id="prevBtn" aria-label="Previous projects"><Icon name="left" size={18} /></button>
+          <button class="arrow" id="nextBtn" aria-label="Next projects"><Icon name="right" size={18} /></button>
+        </div>
+      </div>
+
+      <div class="track" id="track">
+        <article class="card project featured">
+          <div class="shot">
+            <span class="badge">Case study</span>
+            <Mockup variant={first.visual} dark={first.dark} />
+          </div>
+          <div class="project-body">
+            <div class="eyebrow">{first.context}</div>
+            <h3 class="project-title lg">{first.title}</h3>
+            <p class="muted">{first.summary}</p>
+            <div class="tags">{first.tags.map((t) => <span class="tag">{t}</span>)}</div>
+          </div>
+        </article>
+        {rest.map((p) => (
+          <article class="card project">
+            <div class="shot"><Mockup variant={p.visual} dark={p.dark} /></div>
+            <div class="project-body">
+              <div class="eyebrow">{p.context}</div>
+              <h3 class="project-title">{p.title}</h3>
+              <p class="muted clamp">{p.summary}</p>
+              <div class="tags">{p.tags.map((t) => <span class="tag">{t}</span>)}</div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- ===== EXPERIENCE ===== -->
+    <section id="experience" class="grid-2 align-start">
+      <div class="card pad-lg">
+        <h2 class="h-display">Professional Path</h2>
+        <ol class="timeline">
+          {experience.map((e, i) => (
+            <li class={i < 2 ? "current" : ""}>
+              <div class="tl-head">
+                <h3>{e.role}</h3>
+                <span class="date">{e.period}</span>
+              </div>
+              <div class="tl-company">{e.company} <span>/</span> {e.place}</div>
+              {e.points.map((p) => <p class="muted small">{p}</p>)}
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <div class="stack-col">
+        <div class="card pad-lg">
+          <h2 class="h-display">Education</h2>
+          <div class="edu-list">
+            {education.map((e) => (
+              <div class={`edu ${e.dark ? "" : "soft"}`}>
+                <div class="edu-head">
+                  <h3>{e.title}</h3>
+                  <span class={e.dark ? "gpa" : "year"}>{e.badge}</span>
+                </div>
+                <div class="eyebrow">{e.school}</div>
+                <p class="small muted">{e.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="card pad-lg">
+          <h2 class="h-display">Certifications</h2>
+          <ul class="cert-list">
+            {certifications.map((c) => (
+              <li><Icon name="award" size={18} /> <span>{c}</span></li>
+            ))}
+          </ul>
+          <div class="langs">
+            {profile.languages.map((l) => <span class="tag">{l}</span>)}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact" class="cta">
+      <h2>Ready for the<br />next <span>big challenge?</span></h2>
+      <p>I'm currently exploring new opportunities and interesting collaborations. Let's build something exceptional.</p>
+      <div class="cta-actions">
+        <a class="btn btn-white" href={`mailto:${profile.email}`}><Icon name="mail" size={16} /> {profile.email}</a>
+        <a class="btn btn-ghost" href={profile.linkedin} target="_blank" rel="noopener"><Icon name="linkedin" size={16} /> Connect on LinkedIn</a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>© {year} {profile.name}. All rights reserved. Made with <span class="heart">♥</span> in {profile.city}.</span>
+      <nav>
+        <a href={profile.github} target="_blank" rel="noopener">GitHub</a>
+        <a href={profile.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+        <a href={`mailto:${profile.email}`}>Email</a>
+        <a href={resumeUrl} target="_blank">Resume</a>
+      </nav>
+    </footer>
+  </main>
+
+  <script>
+    const track = document.getElementById("track")!;
+    const step = () => (track.querySelector(".project:not(.featured)") as HTMLElement)?.offsetWidth + 24 || 300;
+    const prev = document.getElementById("prevBtn") as HTMLButtonElement;
+    const next = document.getElementById("nextBtn") as HTMLButtonElement;
+    prev.addEventListener("click", () => track.scrollBy({ left: -step(), behavior: "smooth" }));
+    next.addEventListener("click", () => track.scrollBy({ left: step(), behavior: "smooth" }));
+    const sync = () => {
+      prev.disabled = track.scrollLeft <= 2;
+      next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+    };
+    track.addEventListener("scroll", sync, { passive: true });
+    window.addEventListener("resize", sync);
+    sync();
+  </script>
 </Layout>

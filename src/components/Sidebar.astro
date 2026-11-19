@@ -1,0 +1,65 @@
+---
+import Icon from "./Icon.astro";
+import { profile } from "../data/profile";
+const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+const links = [
+  ["dashboard", "Dashboard"],
+  ["about", "About Me"],
+  ["work", "Selected Work"],
+  ["experience", "Experience"],
+  ["contact", "Contact"],
+];
+---
+<header class="topbar">
+  <a class="logo" href="#dashboard"><b>{profile.initials}</b>PORTFOLIO</a>
+  <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="sidebar">
+    <Icon name="menu" size={22} />
+  </button>
+</header>
+
+<aside class="sidebar" id="sidebar">
+  <div>
+    <a class="logo" href="#dashboard"><b>{profile.initials}</b>PORTFOLIO</a>
+    <nav class="nav" id="nav" aria-label="Sections">
+      {links.map(([id, label]) => <a href={`#${id}`} data-section={id}>{label}</a>)}
+    </nav>
+  </div>
+  <div>
+    <a class="talk" href={`mailto:${profile.email}`}>Let's Talk</a>
+    <div class="side-social">
+      <a href={profile.github} target="_blank" rel="noopener" aria-label="GitHub"><Icon name="siGithub" size={18} /></a>
+      <a href={profile.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn"><Icon name="linkedin" size={19} /></a>
+      <a href={`${base}${profile.resume}`} target="_blank" aria-label="Resume (PDF)"><Icon name="download" size={18} /></a>
+    </div>
+  </div>
+</aside>
+<div class="scrim" id="scrim"></div>
+
+<script>
+  const sidebar = document.getElementById("sidebar")!;
+  const btn = document.getElementById("menuBtn")!;
+  const scrim = document.getElementById("scrim")!;
+  const setOpen = (open: boolean) => {
+    sidebar.classList.toggle("open", open);
+    scrim.classList.toggle("open", open);
+    btn.setAttribute("aria-expanded", String(open));
+  };
+  btn.addEventListener("click", () => setOpen(!sidebar.classList.contains("open")));
+  scrim.addEventListener("click", () => setOpen(false));
+  sidebar.querySelectorAll("a[href^='#']").forEach((a) => a.addEventListener("click", () => setOpen(false)));
+
+  // Scroll-spy: highlight the section currently in view.
+  const navLinks = [...document.querySelectorAll<HTMLAnchorElement>("#nav a")];
+  const sections = navLinks
+    .map((a) => document.getElementById(a.dataset.section!))
+    .filter((s): s is HTMLElement => !!s);
+  const update = () => {
+    const y = window.scrollY + window.innerHeight * 0.35;
+    let current = sections[0]?.id;
+    for (const s of sections) if (s.offsetTop <= y) current = s.id;
+    if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) current = sections.at(-1)?.id;
+    navLinks.forEach((a) => a.classList.toggle("active", a.dataset.section === current));
+  };
+  window.addEventListener("scroll", update, { passive: true });
+  update();
+</script>
